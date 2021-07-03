@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,30 +10,10 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
   </head>
   <body>
-    <style>
-      input {
-        width: 100%;
-        height: 35px;
-      }
-
-      #messages {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      #messages li {
-        padding: 5px 10px;
-      }
-
-      #messages li:nth-child(odd) {
-        background: #eee;
-      }
-    </style>
-
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
@@ -58,38 +37,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
-    <script>
-      const socket = io("http://localhost:8000");
-
-      socket.on("messageFromServer", (dataFromServer) => {
-        console.log(dataFromServer);
-        socket.emit("messageToServer", { data: "This is from the Client" });
-      });
-
-      //   socket.on("ping", () => {
-      //     console.log("Ping was received from the Server!!");
-      //   });
-
-      //   socket.on("pong", (latency) => {
-      //     console.log(latency);
-      //     console.log("Pong was sent to the Server!!");
-      //   });
-
-      document
-        .querySelector("#message-form")
-        .addEventListener("submit", (e) => {
-          //Prevent Form from utomatic Submission
-          e.preventDefault();
-          let inputBox = document.querySelector("#user-message");
-          const newMessage = inputBox.value;
-
-          socket.emit("newMessageToServer", { text: newMessage });
-          inputBox.value = "";
-        });
-
-      socket.on("messageToClients", (msg) => {
-        document.querySelector("#messages").innerHTML += `<li>${msg.text}</li>`;
-      });
-    </script>
+    <script src="./scripts.js"></script>
   </body>
 </html>
